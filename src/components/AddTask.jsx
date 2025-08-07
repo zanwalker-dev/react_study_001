@@ -24,7 +24,7 @@ function AddTask({ onAddTaskSubmit }) {
       <button
         className="bg-slate-400 text-white p-2 rounded-md w-[60%]"
         onClick={() => {
-          if (!title || !description) {
+          if (!title.trim() || !description.trim()) {
             return alert("Preencha o título e a descrição da tarefa!");
           }
 
