@@ -1,8 +1,14 @@
 /* eslint-disable react/prop-types */
 import { ChevronRightIcon, TrashIcon } from "lucide-react";
 import PropTypes from "prop-types";
+import { useNavigate } from "react-router-dom";
 
 function Tasks({ tasks, onTaskClick, onDeleteTaskClick }) {
+  const navigate = useNavigate();
+
+  const onSeeDetailsClick = (task) => {
+    navigate(`/task?title=${task.title}&description=${task.description}`);
+  };
   return (
     <div>
       <ul className="space-y-3 p-6 bg-slate-200 rounded-lg shadow">
@@ -16,7 +22,10 @@ function Tasks({ tasks, onTaskClick, onDeleteTaskClick }) {
             >
               {task.title}
             </button>
-            <button className="bg-slate-400 text-white p-2 rounded-md">
+            <button
+              onClick={() => onSeeDetailsClick(task)}
+              className="bg-slate-400 text-white p-2 rounded-md"
+            >
               <ChevronRightIcon />
             </button>
             <button
