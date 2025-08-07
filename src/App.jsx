@@ -59,7 +59,7 @@ function App() {
         <h1 className="text-3xl text-slate-100 font-bold text-center">
           Gerenciamento de Tarefas
         </h1>
-        <AddTask />
+        <AddTask onAddTaskSubmit={onAddTaskSubmit} />
         <Tasks
           tasks={tasks}
           onTaskClick={onTaskClick}
