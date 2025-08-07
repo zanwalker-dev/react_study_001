@@ -24,6 +24,35 @@ function App() {
     },
   ]);
 
+  const onTaskClick = (taskId) => {
+    const newTask = tasks.map((task) => {
+      if (task.id === taskId) {
+        return { ...task, isCompleted: !task.isCompleted };
+      }
+
+      return task;
+    });
+
+    setTasks(newTask);
+  };
+
+  const onDeleteTaskClick = (taskId) => {
+    const newTasks = tasks.filter((task) => task.id != taskId);
+
+    setTasks(newTasks);
+  };
+
+  const onAddTaskSubmit = (title, description) => {
+    const newTask = {
+      id: tasks.length + 1,
+      title: title,
+      description: description,
+      isCompleted: false,
+    };
+
+    setTasks([...tasks, newTask]);
+  };
+
   return (
     <div className="w-screen h-screen bg-slate-800 flex justify-center p-6">
       <div className="w-[500px]">
@@ -31,7 +60,11 @@ function App() {
           Gerenciamento de Tarefas
         </h1>
         <AddTask />
-        <Tasks tasks={tasks} />
+        <Tasks
+          tasks={tasks}
+          onTaskClick={onTaskClick}
+          onDeleteTaskClick={onDeleteTaskClick}
+        />
       </div>
     </div>
   );
