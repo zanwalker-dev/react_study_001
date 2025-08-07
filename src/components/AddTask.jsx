@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useState } from "react";
 
 function AddTask({ onAddTaskSubmit }) {
@@ -20,7 +21,18 @@ function AddTask({ onAddTaskSubmit }) {
         value={description}
         onChange={(e) => setDescription(e.target.value)}
       />
-      <button className="bg-slate-400 text-white p-2 rounded-md w-[60%]">
+      <button
+        className="bg-slate-400 text-white p-2 rounded-md w-[60%]"
+        onClick={() => {
+          if (!title || !description) {
+            return alert("Preencha o título e a descrição da tarefa!");
+          }
+
+          onAddTaskSubmit(title, description);
+          setTitle("");
+          setDescription("");
+        }}
+      >
         Adicionar
       </button>
     </div>
