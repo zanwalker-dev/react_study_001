@@ -11,6 +11,19 @@ function App() {
   useEffect(() => {
     localStorage.setItem("tasks", JSON.stringify(tasks));
   }, [tasks]);
+  // useEffect com parametro de objeto vazio = executa a função quando a pagina inicia
+  useEffect(() => {
+    //Chamar API
+    const fetchTasks = async () => {
+      const url = "https://jsonplaceholder.typicode.com/todos/?_limit=10";
+      const response = await fetch(url, { method: "GET" });
+      const data = await response.json();
+      console.log(data);
+      //Armazenar/persistir esses dados no state
+      setTasks(data);
+    };
+    fetchTasks();
+  }, []);
 
   const onTaskClick = (taskId) => {
     const newTask = tasks.map((task) => {
@@ -42,7 +55,7 @@ function App() {
   };
 
   return (
-    <div className="w-screen h-screen bg-slate-800 flex justify-center p-6">
+    <div className="w-screen h-full bg-slate-800 flex justify-center p-6">
       <div className="w-[500px] space-y-4">
         <h1 className="text-3xl text-slate-100 font-bold text-center">
           Gerenciamento de Tarefas
